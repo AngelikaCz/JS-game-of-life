@@ -8,6 +8,11 @@ label {
 input {
 }
 
+.create-board-button {
+  margin: 40px auto;
+  display: block;
+}
+
 .start-stop-button {
   margin: 40px auto;
   display: block;
