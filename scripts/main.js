@@ -4,7 +4,6 @@ const startStopButton = document.querySelector(".start-stop-button");
 const createBoardButton = document.querySelector(".create-board-button");
 const gameBoard = document.querySelector(".game-board");
 let createBoardButtonOn = false;
-// const selectedCell = document.querySelector(".cell");
 
 createBoardButton.addEventListener("click", () => {
   createBoardButtonOn = !createBoardButtonOn;
@@ -41,9 +40,7 @@ function createBoard() {
   } else {
     alert("Type in height and width for the board");
   }
-
   createBoardButton.innerHTML = "CLEAN BOARD";
-  // board za każdym kliknieciem się powieksza, moze klasa? Zmiana przycisku na clean board?
 }
 
 function cleanBoard() {
@@ -51,10 +48,19 @@ function cleanBoard() {
   createBoardButton.innerHTML = "CREATE BOARD";
 }
 
-// function startGame() {}
+gameBoard.addEventListener("click", (event) => {
+  if (event.target.tagName === "DIV") {
+    console.log(event.target);
+    event.target.classList.toggle("alive");
+    event.target.classList.toggle("dead");
+  }
+});
 
-// selectedCell.addEventListener("click", changeColor);
+// funkcja do policzenia ile jest komórek na planszy?
+// function countCells() {}
 
-// function changeColor() {
-//   selectedCell.classList.add("alive");
+// function startGame() {
+//   for (let i; i < countedCells; i++) {
+//     let myCellIdPosition;
+//   }
 // }

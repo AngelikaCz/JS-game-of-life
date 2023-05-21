@@ -43,6 +43,7 @@ input {
 
 .alive {
   background-color: black;
+  color: red;
 }
 
 .dead {
