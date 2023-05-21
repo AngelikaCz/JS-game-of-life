@@ -11,21 +11,25 @@ function createBoard() {
   const widthFromInputValue = widthFromInput.value;
   const heightFromInputValue = heightFromInput.value;
   if (widthFromInputValue > 0 && heightFromInputValue > 0) {
-    let idRow = 1;
+    let idRow = 0;
     let idCell = 1;
     for (let i = 0; i < widthFromInputValue; i++) {
       const row = document.createElement("div");
       let board = document.querySelector(".game-board");
-      row.setAttribute("id", `${idRow} - ${idCell}`);
       row.className = "row";
       idRow++;
       board.appendChild(row);
+      console.log(idCell === parseInt(heightFromInputValue));
+      console.log(idCell, parseInt(heightFromInputValue));
       for (let j = 0; j < heightFromInputValue; j++) {
         const column = document.createElement("div");
         column.className = "cell dead";
-        // column.setAttribute("id", `${idCell}`);
-        idCell++;
+        column.setAttribute("id", `${idRow}-${idCell}`);
         row.appendChild(column);
+        if (idCell === parseInt(heightFromInputValue)) {
+          idCell = 0;
+        }
+        idCell++;
       }
     }
   } else {
