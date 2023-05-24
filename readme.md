@@ -1,1 +1,1 @@
-- Project created in HTML, CSS and JS, using rpgui.
+- Project created in HTML, CSS and JS
