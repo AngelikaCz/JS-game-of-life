@@ -48,32 +48,32 @@ function cleanBoard() {
 
 gameBoard.addEventListener("click", (event) => {
   if (event.target.tagName === "DIV") {
-    console.log(event.target);
     event.target.classList.toggle("alive");
     event.target.classList.toggle("dead");
   }
 });
 
-// funkcja do policzenia ile jest komórek na planszy?
-// function countCells() {}
-
 startStopButton.addEventListener("click", startGame);
 
 function startGame() {
   const cells = document.querySelectorAll(".game-board .cell");
-  cells.forEach((cell) => console.log(cell.id));
+  cells.forEach(verifyCells);
+  console.table(cells);
 }
 
-function verifyCells() {
-  // trzeba spisać warunki dla każdej komórki
-  //   let top = cell.id[0] & cell.id[2]-1
-  //   let bottom = cell.id[0] & cell.id[2]+1
-  //   let left = cell.id[0]-1 & cell.id[2]
-  //   let right = cell.id[0]+1 cell.id[2]
-  //  let topRight = cell.id[0]+1 cell.id[2]-1
-  //  let bottomRight = cell.id[0]+1 cell.id[2]+1
-  //  let topLeft = cell.id[0]-1 cell.id[2]-1
-  //  let bottomLeft = cell.id[0]-1 cell.id[2]+1
+function verifyCells(cell) {
+  if (cell.classList.contains("dead")) {
+    console.log(cell.id);
+    console.log(cell.id[0]);
+  }
 }
 
-//można moze rozbić na 2 funkcje, rob cos jesli jest alive, rob coś jesli jest dead/ Dodatkowy warunek krawędziowy? Nie sprawdzaj?
+// trzeba spisać warunki dla każdej komórki, nie wyciągniesz z id jak będzie wieksze od 9
+//   let top = cell.id[0] & cell.id[2]-1
+//   let bottom = cell.id[0] & cell.id[2]+1
+//   let left = cell.id[0]-1 & cell.id[2]
+//   let right = cell.id[0]+1 cell.id[2]
+//  let topRight = cell.id[0]+1 cell.id[2]-1
+//  let bottomRight = cell.id[0]+1 cell.id[2]+1
+//  let topLeft = cell.id[0]-1 cell.id[2]-1
+//  let bottomLeft = cell.id[0]-1 cell.id[2]+1
