@@ -21,7 +21,7 @@ function createBoard() {
     for (let i = 0; i < widthFromInputValue; i++) {
       const row = document.createElement("div");
       let board = document.querySelector(".game-board");
-      row.className = "row";
+      row.className = "column";
       idRow++;
       board.appendChild(row);
       for (let j = 0; j < heightFromInputValue; j++) {
@@ -57,15 +57,41 @@ startStopButton.addEventListener("click", startGame);
 
 function startGame() {
   const cells = document.querySelectorAll(".game-board .cell");
-  cells.forEach(verifyCells);
-  console.table(cells);
+  // cells.forEach(verifyCells);
+  // console.table(cells);
+  saveInitalStatusBoard();
 }
 
-function verifyCells(cell) {
-  if (cell.classList.contains("dead")) {
-    console.log(cell.id);
-    console.log(cell.id[0]);
+// function verifyCells(cell) {
+//   if (cell.classList.contains("dead")) {
+//     console.log(cell.id);
+//     console.log(cell.id[0]);
+//   }
+// }
+
+function saveInitialStatusColumn(passedColumn) {
+  const state = [];
+  const column = passedColumn;
+  const cellsInColumn = column.children;
+  for (let i = 0; i < cellsInColumn.length; i++) {
+    if (cellsInColumn[i].classList.contains("dead")) {
+      state.push(0);
+    } else {
+      state.push(1);
+    }
   }
+  return state;
+}
+
+// nie przeskakuje do kolejnej kolumny tylko zostaje w pierwszej
+function saveInitalStatusBoard() {
+  const boardState = [];
+  const allColumns = gameBoard.children;
+  for (let i = 0; i < allColumns.length; i++) {
+    boardState.push(saveInitialStatusColumn(allColumns[i]));
+    console.log(allColumns[i]);
+  }
+  console.log(boardState);
 }
 
 // trzeba spisać warunki dla każdej komórki, nie wyciągniesz z id jak będzie wieksze od 9
