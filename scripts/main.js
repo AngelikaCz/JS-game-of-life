@@ -57,17 +57,8 @@ startStopButton.addEventListener("click", startGame);
 
 function startGame() {
   const cells = document.querySelectorAll(".game-board .cell");
-  // cells.forEach(verifyCells);
-  // console.table(cells);
   saveInitalStatusBoard();
 }
-
-// function verifyCells(cell) {
-//   if (cell.classList.contains("dead")) {
-//     console.log(cell.id);
-//     console.log(cell.id[0]);
-//   }
-// }
 
 function saveInitialStatusColumn(passedColumn) {
   const state = [];
@@ -83,13 +74,34 @@ function saveInitialStatusColumn(passedColumn) {
   return state;
 }
 
-// nie przeskakuje do kolejnej kolumny tylko zostaje w pierwszej
 function saveInitalStatusBoard() {
   const boardState = [];
   const allColumns = gameBoard.children;
   for (let i = 0; i < allColumns.length; i++) {
     boardState.push(saveInitialStatusColumn(allColumns[i]));
-    console.log(allColumns[i]);
+  }
+  console.log(boardState);
+  return boardState;
+}
+function checkNeighbours() {
+  let myCell = boardState[x][y];
+  let top = boardState[x - 1][y];
+  let bottom = boardState[x + 1][y];
+  let right = boardState[x][y + 1];
+  let left = boardState[x][y - 1];
+  let topRight = boardState[x - 1][y + 1];
+  let bottomRight = boardState[x + 1][y + 1];
+  let topLeft = boardState[x - 1][y - 1];
+  let bottomLeft = boardState[x + 1][y - 1];
+  let sumNeighbours =
+    top + bottom + right + left + topRight + bottomRight + topLeft + bottomLeft;
+
+  if ((myCell === 1 && sumNeighbours < 2) || sumNeighbours > 3) {
+    myCell = 0;
+  }
+
+  if (myCell === 0 && sumNeighbours === 3) {
+    myCell = 1;
   }
   console.log(boardState);
 }
