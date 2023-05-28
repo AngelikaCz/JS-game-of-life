@@ -56,8 +56,10 @@ gameBoard.addEventListener("click", (event) => {
 startStopButton.addEventListener("click", startGame);
 
 function startGame() {
+  startStopButton.innerHTML = "STOP";
   const cells = document.querySelectorAll(".game-board .cell");
   saveInitalStatusBoard();
+  checkNeighbours();
 }
 
 function saveInitialStatusColumn(passedColumn) {
@@ -83,35 +85,49 @@ function saveInitalStatusBoard() {
   console.log(boardState);
   return boardState;
 }
+
 function checkNeighbours() {
-  let myCell = boardState[x][y];
-  let top = boardState[x - 1][y];
-  let bottom = boardState[x + 1][y];
-  let right = boardState[x][y + 1];
-  let left = boardState[x][y - 1];
-  let topRight = boardState[x - 1][y + 1];
-  let bottomRight = boardState[x + 1][y + 1];
-  let topLeft = boardState[x - 1][y - 1];
-  let bottomLeft = boardState[x + 1][y - 1];
-  let sumNeighbours =
-    top + bottom + right + left + topRight + bottomRight + topLeft + bottomLeft;
+  let boardState = saveInitalStatusBoard();
+  for (let x = 0; x < widthFromInput.value; x++) {
+    for (let y = 0; y < heightFromInput.value; y++) {
+      // wyeliminuj brzegi
+      if (
+        x === 0 ||
+        x === widthFromInput.value - 1 ||
+        y === 0 ||
+        y === heightFromInput.value - 1
+      ) {
+        continue;
+      }
+      let myCell = boardState[x][y];
+      let top = boardState[x - 1][y];
+      let bottom = boardState[x + 1][y];
+      let right = boardState[x][y + 1];
+      let left = boardState[x][y - 1];
+      let topRight = boardState[x - 1][y + 1];
+      let bottomRight = boardState[x + 1][y + 1];
+      let topLeft = boardState[x - 1][y - 1];
+      let bottomLeft = boardState[x + 1][y - 1];
+      let sumNeighbours =
+        top +
+        bottom +
+        right +
+        left +
+        topRight +
+        bottomRight +
+        topLeft +
+        bottomLeft;
 
-  if ((myCell === 1 && sumNeighbours < 2) || sumNeighbours > 3) {
-    myCell = 0;
-  }
+      if ((myCell === 1 && sumNeighbours < 2) || sumNeighbours > 3) {
+        boardState[x][y] = 0;
+      }
 
-  if (myCell === 0 && sumNeighbours === 3) {
-    myCell = 1;
+      if (myCell === 0 && sumNeighbours === 3) {
+        boardState[x][y] = 1;
+      }
+    }
   }
-  console.log(boardState);
+  let newBoardState = boardState;
+  console.log(newBoardState);
+  return newBoardState;
 }
-
-// trzeba spisać warunki dla każdej komórki, nie wyciągniesz z id jak będzie wieksze od 9
-//   let top = cell.id[0] & cell.id[2]-1
-//   let bottom = cell.id[0] & cell.id[2]+1
-//   let left = cell.id[0]-1 & cell.id[2]
-//   let right = cell.id[0]+1 cell.id[2]
-//  let topRight = cell.id[0]+1 cell.id[2]-1
-//  let bottomRight = cell.id[0]+1 cell.id[2]+1
-//  let topLeft = cell.id[0]-1 cell.id[2]-1
-//  let bottomLeft = cell.id[0]-1 cell.id[2]+1
