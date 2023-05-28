@@ -17,23 +17,23 @@ function createBoard() {
   const heightFromInputValue = heightFromInput.value;
   if (widthFromInputValue > 0 && heightFromInputValue > 0) {
     let idRow = 0;
-    let idCell = 1;
+    let idCell = 0;
     for (let i = 0; i < widthFromInputValue; i++) {
       const row = document.createElement("div");
       let board = document.querySelector(".game-board");
       row.className = "column";
-      idRow++;
       board.appendChild(row);
       for (let j = 0; j < heightFromInputValue; j++) {
         const column = document.createElement("div");
         column.className = "cell dead";
         column.setAttribute("id", `${idRow}-${idCell}`);
         row.appendChild(column);
-        if (idCell === parseInt(heightFromInputValue)) {
-          idCell = 0;
+        if (idCell === parseInt(heightFromInputValue) - 1) {
+          idCell = -1;
         }
         idCell++;
       }
+      idRow++;
     }
   } else {
     alert("Type in height and width for the board");
@@ -60,6 +60,7 @@ function startGame() {
   const cells = document.querySelectorAll(".game-board .cell");
   saveInitalStatusBoard();
   checkNeighbours();
+  updateBoard(heightFromInput.value, widthFromInput.value);
 }
 
 function saveInitialStatusColumn(passedColumn) {
@@ -82,7 +83,6 @@ function saveInitalStatusBoard() {
   for (let i = 0; i < allColumns.length; i++) {
     boardState.push(saveInitialStatusColumn(allColumns[i]));
   }
-  console.log(boardState);
   return boardState;
 }
 
@@ -128,6 +128,20 @@ function checkNeighbours() {
     }
   }
   let newBoardState = boardState;
-  console.log(newBoardState);
   return newBoardState;
+}
+
+function updateBoard(row, col) {
+  let newBoardState = checkNeighbours();
+  for (row in newBoardState) {
+    for (col in newBoardState[row]) {
+      let cell = document.getElementById(row + "-" + col);
+      console.log(cell);
+      if (newBoardState[row][col] == 0) {
+        cell.setAttribute("class", "dead");
+      } else {
+        cell.setAttribute("class", "alive");
+      }
+    }
+  }
 }
