@@ -1,44 +1,60 @@
+body {
+  padding: 20px;
+  background-color: #eff2bf;
+  margin: 0 auto;
+}
+h1 {
+  text-align: center;
+}
 form {
   text-align: center;
 }
 
 label {
+  font-weight: bold;
 }
 
-input {
+#gridContainer {
+  padding-bottom: 10px;
+  margin: 0 auto;
 }
 
-.create-board-button {
-  margin: 40px auto;
-  display: block;
-}
-
-.start-stop-button {
-  margin: 40px auto;
-  display: block;
-  background-color: aquamarine;
-  font-size: 20px;
-  border-radius: 20px;
-  padding: 20px;
-  font-weight: 700;
-}
-
-.game-board {
-  display: flex;
-  justify-content: center;
+table {
+  background-color: #c5d6c6;
+  border-spacing: 0;
+  margin: 0 auto;
 }
 
 td {
-  background-color: white;
-  width: 50px;
-  height: 50px;
-  border: 1px solid black;
+  border: 1px solid #f1f5da;
+  border-radius: 3px;
+  width: 10px;
+  height: 10px;
 }
 
-.alive {
-  background-color: black;
+span {
+  color: #222;
 }
 
-.dead {
-  background-color: white;
+.controls {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.start,
+.clear,
+.random,
+.create {
+  padding: 0.75em;
+  border-radius: 5px;
+  border: none;
+  background: aquamarine;
+}
+
+td.dead {
+  background-color: transparent;
+}
+
+td.live {
+  background-color: #000;
 }

@@ -12,6 +12,7 @@
     <style></style>
   </head>
   <body>
+    <h1>Game of Life</h1>
     <form action="">
       <label for="height">Height</label>
       <input
@@ -28,9 +29,14 @@
         placeholder="Type the width of the board"
       />
     </form>
-    <button class="create-board-button">CREATE BOARD</button>
-    <button class="start-stop-button" id="start-stop-button">START</button>
-    <div class="game-board"></div>
-    <script type="module" src="./scripts/main.js"></script>
+    <div class="controls">
+      <button id="create" class="create"><span>Create Board</span></button>
+      <button id="start" class="start"><span>Start</span></button>
+      <button id="clear" class="clear"><span>Clear</span></button>
+      <button id="random" class="random"><span>Random</span></button>
+    </div>
+    <div id="gridContainer"></div>
+
+    <script type="module" src="./scripts/main.js " defer></script>
   </body>
 </html>
